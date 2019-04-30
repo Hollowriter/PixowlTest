@@ -72,11 +72,6 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-    listener->setSwallowTouches(true);
-    listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
-    listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchMoved, this);
-    listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     relocateSprite(bubble);
     for (int i = 0; i<enemyNumber;i++)
     {
@@ -180,7 +175,7 @@ void HelloWorld::locateEnemies()
     }
 }
 
-void HelloWorld::relocateSprite(cocos2d::Sprite *shot) // Modify this function to collide with bubble
+void HelloWorld::relocateSprite(cocos2d::Sprite *shot)
 {
     cocos2d::Rect bullet = shot->getBoundingBox();
     bool randomGot = false;
