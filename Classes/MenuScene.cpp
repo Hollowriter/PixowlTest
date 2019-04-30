@@ -51,11 +51,6 @@ bool MenuScene::init()
 
 void MenuScene::update(float delta)
 {
-    listener->setSwallowTouches(true);
-    listener->onTouchBegan = CC_CALLBACK_2(MenuScene::onTouchBegan, this);
-    listener->onTouchMoved = CC_CALLBACK_2(MenuScene::onTouchMoved, this);
-    listener->onTouchEnded = CC_CALLBACK_2(MenuScene::onTouchEnded, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 bool MenuScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)

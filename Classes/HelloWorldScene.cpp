@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "MenuScene.h"
 #include "SimpleAudioEngine.h"
+#include <string>
 
 USING_NS_CC;
 
@@ -33,10 +34,6 @@ bool HelloWorld::init()
     background = Sprite::create("background.png");
     fish = Sprite::create("fish.png");
     bubble = Sprite::create("bubble.png");
-    /*evilFish = Sprite::create("badFish.png");
-    evilFish->setPosition(visibleSize.height / 4, visibleSize.width / 4);
-    evilFish->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
-    enemyBehaviourBeginning(evilFish);*/
     this->addChild(background);
     this->addChild(fish);
     this->addChild(bubble);
