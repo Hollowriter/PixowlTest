@@ -2,6 +2,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "C:\cocos2d-x-3.16\Fish\cocos2d\cocos\2d\CCNode.h"
 
 /**
 @brief    The cocos2d Application.

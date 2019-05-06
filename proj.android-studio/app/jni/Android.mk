@@ -14,7 +14,10 @@ LOCAL_MODULE_FILENAME := libMyGame
 LOCAL_SRC_FILES := $(LOCAL_PATH)/Fish/main.cpp \
                    $(LOCAL_PATH)/../../../Classes/AppDelegate.cpp \
                    $(LOCAL_PATH)/../../../Classes/HelloWorldScene.cpp \
-                   $(LOCAL_PATH)/../../../Classes/MenuScene.cpp
+                   $(LOCAL_PATH)/../../../Classes/MenuScene.cpp \
+                   $(LOCAL_PATH)/../../../Classes/Entity.cpp \
+                   $(LOCAL_PATH)/../../../Classes/FishPlayer.cpp \
+                   $(LOCAL_PATH)/../../../Classes/Bubble.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 
