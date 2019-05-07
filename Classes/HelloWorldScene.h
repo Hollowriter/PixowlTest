@@ -3,6 +3,9 @@
 
 #include "cocos2d.h"
 #include "FishPlayer.h"
+#include "Bubble.h"
+#include "EvilFish.h"
+#include <vector>
 #include "C:\cocos2d-x-3.16\Fish\cocos2d\cocos\2d\CCNode.h"
 
 class HelloWorld : public cocos2d::Scene
@@ -22,9 +25,10 @@ public:
     // cocos2d::Sprite* fish;
     FishPlayer* fish;
     // Hacer que el enemigo se mueva hacia el player y lo devuelva al menu
-    cocos2d::Sprite* evilFishes[4] = {cocos2d::Sprite::create("badFish.png"), cocos2d::Sprite::create("badFish.png"), cocos2d::Sprite::create("badFish.png"), cocos2d::Sprite::create("badFish.png")};
+    // EvilFish* evilFishes[] = {new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png")};
+    std::vector<EvilFish*> evilFishes;
     // cocos2d::Sprite* evilFish;
-    cocos2d::Sprite* bubble;
+    Bubble* bubble;
 
     static cocos2d::Scene* createScene();
 
@@ -44,10 +48,10 @@ public:
     void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event);
     // void rotateCharacter(float directionX, float directionY); // Part of player
     void locateEnemies();
-    void relocateSprite(cocos2d::Sprite * shot); // Modify this function to collide with the bubble
+    void relocateSprite(Entity * shot); // Modify this function to collide with the bubble
     void shotBubble(cocos2d::Touch * touch);
-    void enemyBehaviourBeginning(cocos2d::Sprite * theEnemy);
-    void enemyKillPlayer(cocos2d::Sprite * theEnemy);
+    void enemyBehaviourBeginning(EvilFish * theEnemy);
+    void enemyKillPlayer(EvilFish * theEnemy);
     // void playerAnimation(); // Part of player
     // void setEnemySprites(); // Para setear varios enemigos
 };

@@ -34,7 +34,7 @@ bool HelloWorld::init()
     background = Sprite::create("background.png");
     // fish = Sprite::create("fish.png"); // Part of player
     fish = new FishPlayer("fish.png");
-    bubble = Sprite::create("bubble.png");
+    bubble = new Bubble("bubble.png");
     this->addChild(background);
     this->addChild(fish); // Part of player
     this->addChild(bubble);
@@ -53,13 +53,17 @@ bool HelloWorld::init()
     fish->SetEntityPositionY((visibleSize.height / 2) + 20);
     fish->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
     fish->SetEntityScale(fish->GetSprite()->getScale() / 2);
-    bubble->setPosition(visibleSize.width * 2, visibleSize.height * 2);
-    bubble->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
+    bubble->SetEntityPositionX(visibleSize.width * 2);
+    bubble->SetEntityPositionY(visibleSize.height * 2);
+    bubble->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
+    evilFishes.resize(enemyNumber);
     for (int i=0;i<enemyNumber;i++)
     {
-        evilFishes[i]->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
-        evilFishes[i]->setScale(evilFishes[i]->getScale() / 2);
-        evilFishes[i]->setPosition(200, 200);
+        evilFishes[i] = new EvilFish("badFish.png"); // Crashea en tiempo de ejecucion
+        evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
+        evilFishes[i]->SetEntityScale(evilFishes[i]->getScale() / 2);
+        evilFishes[i]->SetEntityPositionX(200);
+        evilFishes[i]->SetEntityPositionY(200);
     }
     locateEnemies();
     listener = EventListenerTouchOneByOne::create();
@@ -105,18 +109,6 @@ void HelloWorld::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
 
 }
-
-/*void HelloWorld::rotateCharacter(float directionX, float directionY)
-{
-    fish->stopAllActions();
-    float locationX = directionX - fish->getPosition().x;
-    float locationY = directionY - fish->getPosition().y;
-    cocos2d::Vec2 vectorLocation = cocos2d::Vec2(locationX, locationY);
-    playerRotation = vectorLocation.getAngle();
-    auto rotateChar = RotateTo::create(1.0, CC_RADIANS_TO_DEGREES(playerRotation));
-    fish->runAction(rotateChar);
-    //fish->setRotation(CC_RADIANS_TO_DEGREES(playerRotation));
-}*/ // Part of player
 
 void HelloWorld::locateEnemies()
 {
@@ -179,7 +171,7 @@ void HelloWorld::locateEnemies()
     }
 }
 
-void HelloWorld::relocateSprite(cocos2d::Sprite *shot)
+void HelloWorld::relocateSprite(Entity *shot)
 {
     cocos2d::Rect bullet = shot->getBoundingBox();
     bool randomGot = false;
@@ -256,13 +248,13 @@ void HelloWorld::shotBubble(cocos2d::Touch *touch)
     }
 }
 
-void HelloWorld::enemyBehaviourBeginning(cocos2d::Sprite * theEnemy)
+void HelloWorld::enemyBehaviourBeginning(EvilFish * theEnemy)
 {
     auto action = cocos2d::MoveTo::create(5.0, fish->getPosition());
     theEnemy->runAction(action);
 }
 
-void HelloWorld::enemyKillPlayer(cocos2d::Sprite * theEnemy)
+void HelloWorld::enemyKillPlayer(EvilFish * theEnemy)
 {
     cocos2d::Rect enemyBox = theEnemy->getBoundingBox();
     cocos2d::Rect playerBox = fish->getBoundingBox();

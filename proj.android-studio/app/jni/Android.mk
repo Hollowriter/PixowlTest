@@ -17,7 +17,8 @@ LOCAL_SRC_FILES := $(LOCAL_PATH)/Fish/main.cpp \
                    $(LOCAL_PATH)/../../../Classes/MenuScene.cpp \
                    $(LOCAL_PATH)/../../../Classes/Entity.cpp \
                    $(LOCAL_PATH)/../../../Classes/FishPlayer.cpp \
-                   $(LOCAL_PATH)/../../../Classes/Bubble.cpp
+                   $(LOCAL_PATH)/../../../Classes/Bubble.cpp \
+                   $(LOCAL_PATH)/../../../Classes/EvilFish.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 
