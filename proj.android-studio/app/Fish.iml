@@ -30,6 +30,9 @@
     <output url="file://$MODULE_DIR$/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/javac/debugUnitTest/compileDebugUnitTestJavaWithJavac/classes" />
     <exclude-output />
+    <content url="file://$USER_HOME$/AppData/Local/Android/Sdk/ndk-bundle/sources/android/cpufeatures">
+      <sourceFolder url="file://$USER_HOME$/AppData/Local/Android/Sdk/ndk-bundle/sources/android/cpufeatures" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/AppData/Local/Android/android-ndk-r19c/sources/android/cpufeatures">
       <sourceFolder url="file://$USER_HOME$/AppData/Local/Android/android-ndk-r19c/sources/android/cpufeatures" isTestSource="false" />
     </content>

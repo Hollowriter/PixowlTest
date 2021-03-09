@@ -45,10 +45,6 @@ bool HelloWorld::init()
     background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     background->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
     background->setScale(visibleSize.width, visibleSize.height);
-    /*fish->setPosition((visibleSize.width / 2) + 5, (visibleSize.height / 2) + 20);
-    fish->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
-    fish->setTexture("fish.png");
-    fish->setScale(fish->getScale() / 2);*/ // Part of player
     fish->SetEntityPositionX((visibleSize.width / 2) + 5);
     fish->SetEntityPositionY((visibleSize.height / 2) + 20);
     fish->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
@@ -56,14 +52,14 @@ bool HelloWorld::init()
     bubble->SetEntityPositionX(visibleSize.width * 2);
     bubble->SetEntityPositionY(visibleSize.height * 2);
     bubble->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-    evilFishes.resize(enemyNumber);
+    bubble->SetEntityScale(bubble->GetSprite()->getScale());
+    // evilFishes.resize(enemyNumber);
     for (int i=0;i<enemyNumber;i++)
     {
-        evilFishes[i] = new EvilFish("badFish.png"); // Crashea en tiempo de ejecucion
-        evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-        evilFishes[i]->SetEntityScale(evilFishes[i]->getScale() / 2);
         evilFishes[i]->SetEntityPositionX(200);
         evilFishes[i]->SetEntityPositionY(200);
+        evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
+        evilFishes[i]->SetEntityScale(evilFishes[i]->GetSprite()->getScale() / 2);
     }
     locateEnemies();
     listener = EventListenerTouchOneByOne::create();

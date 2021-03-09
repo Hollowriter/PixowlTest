@@ -26,7 +26,7 @@ public:
     FishPlayer* fish;
     // Hacer que el enemigo se mueva hacia el player y lo devuelva al menu
     // EvilFish* evilFishes[] = {new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png")};
-    std::vector<EvilFish*> evilFishes;
+    std::vector<EvilFish*> evilFishes = {new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png")};
     // cocos2d::Sprite* evilFish;
     Bubble* bubble;
 

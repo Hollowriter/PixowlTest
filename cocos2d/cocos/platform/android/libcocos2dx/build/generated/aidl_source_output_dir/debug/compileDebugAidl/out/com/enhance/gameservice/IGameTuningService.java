@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\cocos2d-x-3.16\\Fish\\cocos2d\\cocos\\platform\\android\\java\\src\\com\\enhance\\gameservice\\IGameTuningService.aidl
+ * Original file: D:\\Desktop\\Repo\\PixowlTest\\cocos2d\\cocos\\platform\\android\\java\\src\\com\\enhance\\gameservice\\IGameTuningService.aidl
  */
 package com.enhance.gameservice;
 public interface IGameTuningService extends android.os.IInterface
