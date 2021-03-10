@@ -29,6 +29,7 @@ public:
     cocos2d::Sprite* GetSprite();
     cocos2d::Vec2 GetAnchor();
     std::string GetTexture();
+    bool ContainsTouch(cocos2d::Point location);
     float GetEntityPositionX();
     float GetEntityPositionY();
     float GetEntityScale();

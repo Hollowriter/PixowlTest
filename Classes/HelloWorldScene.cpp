@@ -32,34 +32,33 @@ bool HelloWorld::init()
     imageXsize = visibleSize.width;
     imageYsize = visibleSize.height;
     background = Sprite::create("background.png");
-    // fish = Sprite::create("fish.png"); // Part of player
     fish = new FishPlayer("fish.png");
     bubble = new Bubble("bubble.png");
     this->addChild(background);
-    this->addChild(fish); // Part of player
-    this->addChild(bubble);
+    this->addChild(fish);
     for (int i=0;i<enemyNumber;i++)
     {
         this->addChild(evilFishes[i]);
     }
+    this->addChild(bubble);
     background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     background->setAnchorPoint(Vec2(origin.ANCHOR_MIDDLE));
     background->setScale(visibleSize.width, visibleSize.height);
     fish->SetEntityPositionX((visibleSize.width / 2) + 5);
     fish->SetEntityPositionY((visibleSize.height / 2) + 20);
     fish->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-    fish->SetEntityScale(fish->GetSprite()->getScale() / 2);
+    // fish->SetEntityScale(fish->GetSprite()->getScale() / 2);
     bubble->SetEntityPositionX(visibleSize.width * 2);
     bubble->SetEntityPositionY(visibleSize.height * 2);
     bubble->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-    bubble->SetEntityScale(bubble->GetSprite()->getScale());
+    //bubble->SetEntityScale(bubble->GetSprite()->getScale());
     // evilFishes.resize(enemyNumber);
     for (int i=0;i<enemyNumber;i++)
     {
         evilFishes[i]->SetEntityPositionX(200);
         evilFishes[i]->SetEntityPositionY(200);
         evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-        evilFishes[i]->SetEntityScale(evilFishes[i]->GetSprite()->getScale() / 2);
+        //evilFishes[i]->SetEntityScale(evilFishes[i]->GetSprite()->getScale() / 2);
     }
     locateEnemies();
     listener = EventListenerTouchOneByOne::create();
@@ -231,10 +230,10 @@ void HelloWorld::relocateSprite(Entity *shot)
 
 void HelloWorld::shotBubble(cocos2d::Touch *touch)
 {
-    auto location = touch->getLocation();
-    for (int i=0;i<enemyNumber;i++)
+    Point location = touch->getLocation();
+    for (int i=0;i<evilFishes.size();i++)
     {
-        if (evilFishes[i]->getBoundingBox().containsPoint(location) && !bubbleShot)
+        if (evilFishes[i]->ContainsTouch(location) && !bubbleShot)
         {
             auto action = cocos2d::MoveTo::create(0.5f, location);
             bubble->setPosition(fish->getPosition());
@@ -254,7 +253,7 @@ void HelloWorld::enemyKillPlayer(EvilFish * theEnemy)
 {
     cocos2d::Rect enemyBox = theEnemy->getBoundingBox();
     cocos2d::Rect playerBox = fish->getBoundingBox();
-    if (enemyBox.intersectsRect(playerBox))
+    if (playerBox.intersectsRect(enemyBox))
     {
         auto scene = MenuScene::createScene();
         Director::getInstance()->pushScene(scene);

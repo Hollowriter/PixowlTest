@@ -8,11 +8,11 @@ Entity::Entity(std::string textureName)
 {
     _textureName = textureName;
     _entitySprite = cocos2d::Sprite::create(_textureName);
-    addChild(_entitySprite);
+     addChild(_entitySprite);
     _anchor = cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM;
     _entityPositionX = 0;
     _entityPositionY = 0;
-    _entityScale = 0;
+    _entityScale = _entitySprite->getScale() / 2;
     setPosition(_entityPositionX, _entityPositionY);
     setScale(_entityScale);
     _entitySprite->setTexture(_textureName);
@@ -32,7 +32,7 @@ Entity::Entity(std::string textureName, float entityPositionX, float entityPosit
     setPosition(_entityPositionX, _entityPositionY);
     setScale(_entityScale);
     _entitySprite->setTexture(_textureName);
-    setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+    setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
 }
 
 void Entity::SetSprite(cocos2d::Sprite *entitySprite)
@@ -87,6 +87,11 @@ cocos2d::Vec2 Entity::GetAnchor()
 std::string Entity::GetTexture()
 {
     return _textureName;
+}
+
+bool Entity::ContainsTouch(cocos2d::Point location)
+{
+    return getBoundingBox().containsPoint(location);
 }
 
 float Entity::GetEntityPositionX()
