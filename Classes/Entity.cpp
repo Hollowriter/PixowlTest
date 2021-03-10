@@ -7,15 +7,15 @@
 Entity::Entity(std::string textureName)
 {
     _textureName = textureName;
-    _entitySprite = cocos2d::Sprite::create(_textureName);
-     addChild(_entitySprite);
+    /*_entitySprite = cocos2d::Sprite::create(_textureName);
+     addChild(_entitySprite);*/
     _anchor = cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM;
     _entityPositionX = 0;
     _entityPositionY = 0;
-    _entityScale = _entitySprite->getScale() / 2;
+    _entityScale = /*_entitySprite->*/getScale() / 2;
     setPosition(_entityPositionX, _entityPositionY);
     setScale(_entityScale);
-    _entitySprite->setTexture(_textureName);
+    /*_entitySprite->*/setTexture(_textureName);
     setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
 }
 
@@ -23,26 +23,26 @@ Entity::Entity(std::string textureName, float entityPositionX, float entityPosit
                float entityScale, cocos2d::Vec2 anchor)
 {
     _textureName = textureName;
-    _entitySprite = cocos2d::Sprite::create(_textureName);
-    addChild(_entitySprite);
+    /*_entitySprite = cocos2d::Sprite::create(_textureName);
+    addChild(_entitySprite);*/
     _anchor = anchor;
     _entityPositionX = entityPositionX;
     _entityPositionY = entityPositionY;
     _entityScale = entityScale;
     setPosition(_entityPositionX, _entityPositionY);
     setScale(_entityScale);
-    _entitySprite->setTexture(_textureName);
+    /*_entitySprite->*/setTexture(_textureName);
     setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
 }
 
-void Entity::SetSprite(cocos2d::Sprite *entitySprite)
+/*void Entity::SetSprite(cocos2d::Sprite *entitySprite)
 {
     _entitySprite = entitySprite;
     if (getChildren().size() == 0)
     {
         addChild(_entitySprite);
     }
-}
+}*/
 
 void Entity::SetAnchor(cocos2d::Vec2 anchor)
 {
@@ -53,7 +53,7 @@ void Entity::SetAnchor(cocos2d::Vec2 anchor)
 void Entity::SetTexture(std::string textureName)
 {
     _textureName = textureName;
-    _entitySprite->setTexture(_textureName);
+    /*_entitySprite->*/setTexture(_textureName);
 }
 
 void Entity::SetEntityPositionX(float entityPositionX)
@@ -68,16 +68,21 @@ void Entity::SetEntityPositionY(float entityPositionY)
     setPosition(_entityPositionX, _entityPositionY);
 }
 
+/*void Entity::SetSpritePosition(cocos2d::Vec2 newPosition)
+{
+    _entitySprite->setPosition(newPosition);
+}*/
+
 void Entity::SetEntityScale(float entityScale)
 {
     _entityScale = entityScale;
     setScale(_entityScale);
 }
 
-cocos2d::Sprite* Entity::GetSprite()
+/*cocos2d::Sprite* Entity::GetSprite()
 {
     return _entitySprite;
-}
+}*/
 
 cocos2d::Vec2 Entity::GetAnchor()
 {

@@ -233,7 +233,7 @@ void HelloWorld::shotBubble(cocos2d::Touch *touch)
     Point location = touch->getLocation();
     for (int i=0;i<evilFishes.size();i++)
     {
-        if (evilFishes[i]->ContainsTouch(location) && !bubbleShot)
+        if (evilFishes[i]->getBoundingBox().containsPoint(location) && !bubbleShot)
         {
             auto action = cocos2d::MoveTo::create(0.5f, location);
             bubble->setPosition(fish->getPosition());

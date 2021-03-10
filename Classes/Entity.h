@@ -9,9 +9,9 @@
 #include "C:\cocos2d-x-3.16\Fish\cocos2d\cocos\2d\CCNode.h"
 #include<string>
 
-class Entity : public cocos2d::Node{
+class Entity : public cocos2d::Sprite{
 private:
-    cocos2d::Sprite* _entitySprite;
+    // cocos2d::Sprite* _entitySprite;
     cocos2d::Vec2 _anchor;
     std::string _textureName;
     float _entityPositionX;
@@ -20,13 +20,14 @@ private:
 public:
     Entity(std::string textureName);
     Entity(std::string textureName, float entityPositionX, float entityPositionY, float entityScale, cocos2d::Vec2 anchor);
-    void SetSprite(cocos2d::Sprite* entitySprite);
+    //void SetSprite(cocos2d::Sprite* entitySprite);
     void SetAnchor(cocos2d::Vec2 anchor);
     void SetTexture(std::string textureName);
     void SetEntityPositionX(float entityPositionX);
     void SetEntityPositionY(float entityPositionY);
+    //void SetSpritePosition(cocos2d::Vec2 newPosition);
     void SetEntityScale(float entityScale);
-    cocos2d::Sprite* GetSprite();
+    //cocos2d::Sprite* GetSprite();
     cocos2d::Vec2 GetAnchor();
     std::string GetTexture();
     bool ContainsTouch(cocos2d::Point location);

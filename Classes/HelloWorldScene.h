@@ -11,9 +11,6 @@
 class HelloWorld : public cocos2d::Scene
 {
 public:
-    // float playerDirectionX = 0; // Part of player
-    // float playerDirectionY = 0; // Part of player
-    // float playerRotation = 0; // Part of player
     bool bubbleShot = false;
     float imageXsize = 0;
     float imageYsize = 0;
