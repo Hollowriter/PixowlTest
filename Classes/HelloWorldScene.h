@@ -49,7 +49,7 @@ public:
     void shotBubble(cocos2d::Touch * touch);
     void enemyBehaviourBeginning(EvilFish * theEnemy);
     void enemyKillPlayer(EvilFish * theEnemy);
-    // void playerAnimation(); // Part of player
+    void playerAnimation(); // Part of player
     // void setEnemySprites(); // Para setear varios enemigos
 };
 

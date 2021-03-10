@@ -78,7 +78,7 @@ void HelloWorld::update(float delta)
     {
         enemyKillPlayer(evilFishes[i]);
     }
-    // playerAnimation(); // Part of player
+    playerAnimation(); // Part of player
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
@@ -260,16 +260,16 @@ void HelloWorld::enemyKillPlayer(EvilFish * theEnemy)
     }
 }
 
-/*void HelloWorld::playerAnimation()
+void HelloWorld::playerAnimation()
 {
     if (bubbleShot)
     {
-        fish->setTexture("fishBubble.png");
+        fish->SetTexture("fishBubble.png");
     }
     else {
-        fish->setTexture("fish.png");
+        fish->SetTexture("fish.png");
     }
-}*/ // Part of player
+} // Part of player
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
