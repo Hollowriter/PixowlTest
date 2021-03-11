@@ -22,6 +22,17 @@ void FishPlayer::RotateFish(float fishRotationX, float fishRotationY)
     runAction(rotateAction);
 }
 
+void FishPlayer::Shoot(cocos2d::Touch * touch, Entity * entity, Bubble *bubble)
+{
+    cocos2d::Point point = touch->getLocation();
+    if (entity->getBoundingBox().containsPoint(point) && !bubble->GetIsTraveling())
+    {
+        bubble->setPosition(getPosition());
+        bubble->SetIsTraveling(true);
+        bubble->BubbleMovement(point);
+    }
+}
+
 void FishPlayer::PlayerAnimation(bool isThereABubble)
 {
     if (isThereABubble)

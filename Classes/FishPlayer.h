@@ -3,12 +3,14 @@
 
 #include "cocos2d.h"
 #include "Entity.h"
+#include "Bubble.h"
 
 class FishPlayer : public Entity {
 public:
     FishPlayer(std::string textureName);
     FishPlayer(std::string textureName, float fishPositionX, float fishPositionY, float fishScale, cocos2d::Vec2 anchor);
     void RotateFish(float fishRotationX, float fishRotationY);
+    void Shoot(cocos2d::Touch * touch, Entity * entity, Bubble * bubble);
     void PlayerAnimation(bool isThereABubble);
 };
 

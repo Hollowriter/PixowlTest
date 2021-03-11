@@ -80,20 +80,26 @@ void HelloWorld::update(float delta)
             returnToMenu();
         }
     }
-    fish->PlayerAnimation(bubbleShot);
+    fish->PlayerAnimation(bubble->GetIsTraveling());
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
-    shotBubble(touch);
+    for (int i = 0; i<enemyNumber;i++)
+    {
+        fish->Shoot(touch, evilFishes[i], bubble);
+    }
     return true;
 }
 
 void HelloWorld::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
-    shotBubble(touch);
+    for (int i = 0; i<enemyNumber;i++)
+    {
+        fish->Shoot(touch, evilFishes[i], bubble);
+    }
 }
 
 void HelloWorld::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
@@ -219,22 +225,7 @@ void HelloWorld::relocateSprite(Entity *shot)
             evilFishes[i]->MovingTowardsPlayer(fish);
             bubble->setPosition(imageXsize * 2, imageYsize * 2);
             bubble->stopAllActions();
-            bubbleShot = false;
-        }
-    }
-}
-
-void HelloWorld::shotBubble(cocos2d::Touch *touch)
-{
-    Point location = touch->getLocation();
-    for (int i=0;i<evilFishes.size();i++)
-    {
-        if (evilFishes[i]->getBoundingBox().containsPoint(location) && !bubbleShot)
-        {
-            auto action = cocos2d::MoveTo::create(0.5f, location);
-            bubble->setPosition(fish->getPosition());
-            bubble->runAction(action);
-            bubbleShot = true;
+            bubble->SetIsTraveling(false);
         }
     }
 }

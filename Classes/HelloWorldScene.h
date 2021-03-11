@@ -46,7 +46,6 @@ public:
     void locateEnemies();
     void relocateSprite(Entity * shot); // Modify this function to collide with the bubble
     void shotBubble(cocos2d::Touch * touch);
-    void enemyBehaviourBeginning(EvilFish * theEnemy);
     void returnToMenu();
 };
 
