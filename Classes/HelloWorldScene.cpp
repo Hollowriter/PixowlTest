@@ -75,7 +75,7 @@ void HelloWorld::update(float delta)
     relocateSprite(bubble);
     for (int i = 0; i<enemyNumber;i++)
     {
-        if (evilFishes[i]->IntersecsPlayer(fish))
+        if (evilFishes[i]->IntersectsPlayer(fish))
         {
             returnToMenu();
         }
@@ -158,7 +158,7 @@ void HelloWorld::locateEnemies()
         } while(!randomGot);
         evilFishes[i]->stopAllActions();
         evilFishes[i]->setPosition(initialPositionX, initialPositionY);
-        enemyBehaviourBeginning(evilFishes[i]);
+        evilFishes[i]->MovingTowardsPlayer(fish);
     }
 }
 
@@ -216,7 +216,7 @@ void HelloWorld::relocateSprite(Entity *shot)
             } while(!randomGot);
             evilFishes[i]->stopAllActions();
             evilFishes[i]->setPosition(newPositionX, newPositionY);
-            enemyBehaviourBeginning(evilFishes[i]);
+            evilFishes[i]->MovingTowardsPlayer(fish);
             bubble->setPosition(imageXsize * 2, imageYsize * 2);
             bubble->stopAllActions();
             bubbleShot = false;
@@ -237,12 +237,6 @@ void HelloWorld::shotBubble(cocos2d::Touch *touch)
             bubbleShot = true;
         }
     }
-}
-
-void HelloWorld::enemyBehaviourBeginning(EvilFish * theEnemy)
-{
-    auto action = cocos2d::MoveTo::create(5.0, fish->getPosition());
-    theEnemy->runAction(action);
 }
 
 void HelloWorld::returnToMenu()

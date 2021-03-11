@@ -14,7 +14,13 @@ EvilFish::EvilFish(std::string textureName, float entityPositionX, float entityP
 {
 }
 
-bool EvilFish::IntersecsPlayer(Entity *entity)
+void EvilFish::MovingTowardsPlayer(Entity *entity)
+{
+    auto action = cocos2d::MoveTo::create(5.0, entity->getPosition());
+    runAction(action);
+}
+
+bool EvilFish::IntersectsPlayer(Entity *entity)
 {
     if (getBoundingBox().intersectsRect(entity->getBoundingBox()))
     {
