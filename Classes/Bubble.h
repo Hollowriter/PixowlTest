@@ -17,6 +17,7 @@ public:
     void BubbleMovement(cocos2d::Point location);
     void SetIsTraveling(bool _isTraveling);
     bool GetIsTraveling();
+    bool IntersectsEnemy(Entity * entity, float limitScreenX, float limitScreenY);
 };
 
 

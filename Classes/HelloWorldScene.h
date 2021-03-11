@@ -43,9 +43,7 @@ public:
     bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event);
     void onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * event);
     void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event);
-    void locateEnemies();
-    void relocateSprite(Entity * shot); // Modify this function to collide with the bubble
-    void shotBubble(cocos2d::Touch * touch);
+    void locateEnemy(EvilFish * entity);
     void returnToMenu();
 };
 

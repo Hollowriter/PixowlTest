@@ -57,9 +57,9 @@ bool HelloWorld::init()
         evilFishes[i]->SetEntityPositionX(200);
         evilFishes[i]->SetEntityPositionY(200);
         evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
+        locateEnemy(evilFishes[i]);
         //evilFishes[i]->SetEntityScale(evilFishes[i]->GetSprite()->getScale() / 2);
     }
-    locateEnemies();
     listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
@@ -72,9 +72,12 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-    relocateSprite(bubble);
     for (int i = 0; i<enemyNumber;i++)
     {
+        if (bubble->IntersectsEnemy(evilFishes[i], imageXsize * 2, imageYsize * 2))
+        {
+            locateEnemy(evilFishes[i]);
+        }
         if (evilFishes[i]->IntersectsPlayer(fish))
         {
             returnToMenu();
@@ -107,127 +110,55 @@ void HelloWorld::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 
 }
 
-void HelloWorld::locateEnemies()
+void HelloWorld::locateEnemy(EvilFish *entity)
 {
-    cocos2d::Rect enemies;
-    cocos2d::Rect player = fish->getBoundingBox();
-    float initialPositionX = 0;
-    float initialPositionY = 0;
-    bool randomGot = false;
-    for (int i=0;i<enemyNumber;i++)
-    {
-        enemies = evilFishes[i]->getBoundingBox();
-        do {
-            initialPositionX = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-            initialPositionY = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-            if (initialPositionX != fish->getPosition().x || initialPositionY != fish->getPosition().y)
-            {
-                if (initialPositionX != fish->getPosition().x)
-                {
-                    if (initialPositionX - fish->getPosition().x > 0)
-                    {
-                        if (initialPositionX - fish->getPosition().x > playerLimitDistance)
-                        {
-                            randomGot = true;
-                        }
-                    }
-                    if (initialPositionX - fish->getPosition().x < 0)
-                    {
-                        if (initialPositionX - fish->getPosition().x < -playerLimitDistance)
-                        {
-                            randomGot = true;
-                        }
-                    }
-                }
-                if (initialPositionY != fish->getPosition().y)
-                {
-                    if (initialPositionY - fish->getPosition().y > 0)
-                    {
-                        if (initialPositionY - fish->getPosition().y > playerLimitDistance)
-                        {
-                            randomGot = true;
-                        }
-                    }
-                    if (initialPositionY - fish->getPosition().y < 0)
-                    {
-                        if (initialPositionY - fish->getPosition().y < -playerLimitDistance)
-                        {
-                            randomGot = true;
-                        }
-                    }
-                }
-            }
-            if (enemies.intersectsRect(player))
-            {
-                randomGot = false;
-            }
-        } while(!randomGot);
-        evilFishes[i]->stopAllActions();
-        evilFishes[i]->setPosition(initialPositionX, initialPositionY);
-        evilFishes[i]->MovingTowardsPlayer(fish);
-    }
-}
-
-void HelloWorld::relocateSprite(Entity *shot)
-{
-    cocos2d::Rect bullet = shot->getBoundingBox();
     bool randomGot = false;
     float newPositionX = 0;
     float newPositionY = 0;
-    for (int i=0;i<enemyNumber;i++)
-    {
-        cocos2d::Rect target = evilFishes[i]->getBoundingBox();
-        if (target.intersectsRect(bullet))
+    do {
+        newPositionX = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
+        newPositionY = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
+        if (newPositionX != fish->getPosition().x || newPositionY != fish->getPosition().y)
         {
-            do {
-                newPositionX = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-                newPositionY = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-                if (newPositionX != fish->getPosition().x || newPositionY != fish->getPosition().y)
+            if (newPositionX != fish->getPosition().x)
+            {
+                if (newPositionX - fish->getPosition().x > 0)
                 {
-                    if (newPositionX != fish->getPosition().x)
+                    if (newPositionX - fish->getPosition().x > playerLimitDistance)
                     {
-                        if (newPositionX - fish->getPosition().x > 0)
-                        {
-                            if (newPositionX - fish->getPosition().x > playerLimitDistance)
-                            {
-                                randomGot = true;
-                            }
-                        }
-                        if (newPositionX - fish->getPosition().x < 0)
-                        {
-                            if (newPositionX - fish->getPosition().x < -playerLimitDistance)
-                            {
-                                randomGot = true;
-                            }
-                        }
-                    }
-                    if (newPositionY != fish->getPosition().y)
-                    {
-                        if (newPositionY - fish->getPosition().y > 0)
-                        {
-                            if (newPositionY - fish->getPosition().y > playerLimitDistance)
-                            {
-                                randomGot = true;
-                            }
-                        }
-                        if (newPositionY - fish->getPosition().y < 0)
-                        {
-                            if (newPositionY - fish->getPosition().y < -playerLimitDistance)
-                            {
-                                randomGot = true;
-                            }
-                        }
+                        randomGot = true;
                     }
                 }
-            } while(!randomGot);
-            evilFishes[i]->stopAllActions();
-            evilFishes[i]->setPosition(newPositionX, newPositionY);
-            evilFishes[i]->MovingTowardsPlayer(fish);
-            bubble->setPosition(imageXsize * 2, imageYsize * 2);
-            bubble->stopAllActions();
-            bubble->SetIsTraveling(false);
+                if (newPositionX - fish->getPosition().x < 0)
+                {
+                    if (newPositionX - fish->getPosition().x < -playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+            }
+            if (newPositionY != fish->getPosition().y)
+            {
+                if (newPositionY - fish->getPosition().y > 0)
+                {
+                    if (newPositionY - fish->getPosition().y > playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+                if (newPositionY - fish->getPosition().y < 0)
+                {
+                    if (newPositionY - fish->getPosition().y < -playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+            }
         }
-    }
+    } while(!randomGot);
+    entity->stopAllActions();
+    entity->setPosition(newPositionX, newPositionY);
+    entity->MovingTowardsPlayer(fish);
 }
 
 void HelloWorld::returnToMenu()

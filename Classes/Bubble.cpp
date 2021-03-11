@@ -30,3 +30,15 @@ bool Bubble::GetIsTraveling()
 {
     return isTraveling;
 }
+
+bool Bubble::IntersectsEnemy(Entity *entity, float limitScreenX, float limitScreenY)
+{
+    if (getBoundingBox().intersectsRect(entity->getBoundingBox()))
+    {
+        setPosition(limitScreenX, limitScreenY);
+        stopAllActions();
+        SetIsTraveling(false);
+        return true;
+    }
+    return false;
+}
