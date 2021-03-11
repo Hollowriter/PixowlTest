@@ -46,19 +46,15 @@ bool HelloWorld::init()
     fish->SetEntityPositionX((visibleSize.width / 2) + 5);
     fish->SetEntityPositionY((visibleSize.height / 2) + 20);
     fish->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-    // fish->SetEntityScale(fish->GetSprite()->getScale() / 2);
     bubble->SetEntityPositionX(visibleSize.width * 2);
     bubble->SetEntityPositionY(visibleSize.height * 2);
     bubble->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-    //bubble->SetEntityScale(bubble->GetSprite()->getScale());
-    // evilFishes.resize(enemyNumber);
     for (int i=0;i<enemyNumber;i++)
     {
         evilFishes[i]->SetEntityPositionX(200);
         evilFishes[i]->SetEntityPositionY(200);
         evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
         locateEnemy(evilFishes[i]);
-        //evilFishes[i]->SetEntityScale(evilFishes[i]->GetSprite()->getScale() / 2);
     }
     listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);

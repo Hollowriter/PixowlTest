@@ -71,11 +71,6 @@ std::string Entity::GetTexture()
     return _textureName;
 }
 
-bool Entity::ContainsTouch(cocos2d::Point location)
-{
-    return getBoundingBox().containsPoint(location);
-}
-
 float Entity::GetEntityPositionX()
 {
     return _entityPositionX;

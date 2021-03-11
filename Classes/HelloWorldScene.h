@@ -11,7 +11,6 @@
 class HelloWorld : public cocos2d::Scene
 {
 public:
-    bool bubbleShot = false;
     float imageXsize = 0;
     float imageYsize = 0;
     const float playerLimitDistance = 200;
@@ -19,12 +18,8 @@ public:
     const int enemyNumber = 4;
     cocos2d::EventListenerTouchOneByOne* listener;
     cocos2d::Sprite* background;
-    // cocos2d::Sprite* fish;
     FishPlayer* fish;
-    // Hacer que el enemigo se mueva hacia el player y lo devuelva al menu
-    // EvilFish* evilFishes[] = {new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png")};
     std::vector<EvilFish*> evilFishes = {new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png"), new EvilFish("badFish.png")};
-    // cocos2d::Sprite* evilFish;
     Bubble* bubble;
 
     static cocos2d::Scene* createScene();

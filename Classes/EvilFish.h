@@ -14,7 +14,6 @@ public:
     EvilFish(std::string textureName);
     EvilFish(std::string textureName, float entityPositionX, float entityPositionY, float entityScale, cocos2d::Vec2 anchor);
     void MovingTowardsPlayer(Entity * entity);
-    //void IntersectBubbleAndRelocate(Entity * bubble, Entity * player, float spawningDistance, float playerLimitDistance);
     bool IntersectsPlayer(Entity * entity);
 };
 
