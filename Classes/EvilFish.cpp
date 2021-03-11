@@ -13,3 +13,12 @@ EvilFish::EvilFish(std::string textureName, float entityPositionX, float entityP
                 entityScale, anchor)
 {
 }
+
+bool EvilFish::IntersecsPlayer(Entity *entity)
+{
+    if (getBoundingBox().intersectsRect(entity->getBoundingBox()))
+    {
+        return true;
+    }
+    return false;
+}

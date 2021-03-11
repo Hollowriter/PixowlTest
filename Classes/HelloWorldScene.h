@@ -43,14 +43,11 @@ public:
     bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event);
     void onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * event);
     void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event);
-    // void rotateCharacter(float directionX, float directionY); // Part of player
     void locateEnemies();
     void relocateSprite(Entity * shot); // Modify this function to collide with the bubble
     void shotBubble(cocos2d::Touch * touch);
     void enemyBehaviourBeginning(EvilFish * theEnemy);
-    void enemyKillPlayer(EvilFish * theEnemy);
-    void playerAnimation(); // Part of player
-    // void setEnemySprites(); // Para setear varios enemigos
+    void returnToMenu();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

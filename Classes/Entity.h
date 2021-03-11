@@ -20,14 +20,11 @@ private:
 public:
     Entity(std::string textureName);
     Entity(std::string textureName, float entityPositionX, float entityPositionY, float entityScale, cocos2d::Vec2 anchor);
-    //void SetSprite(cocos2d::Sprite* entitySprite);
     void SetAnchor(cocos2d::Vec2 anchor);
     void SetTexture(std::string textureName);
     void SetEntityPositionX(float entityPositionX);
     void SetEntityPositionY(float entityPositionY);
-    //void SetSpritePosition(cocos2d::Vec2 newPosition);
     void SetEntityScale(float entityScale);
-    //cocos2d::Sprite* GetSprite();
     cocos2d::Vec2 GetAnchor();
     std::string GetTexture();
     bool ContainsTouch(cocos2d::Point location);

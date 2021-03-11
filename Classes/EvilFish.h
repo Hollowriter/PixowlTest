@@ -13,7 +13,7 @@ class EvilFish : public Entity {
 public:
     EvilFish(std::string textureName);
     EvilFish(std::string textureName, float entityPositionX, float entityPositionY, float entityScale, cocos2d::Vec2 anchor);
-
+    bool IntersecsPlayer(Entity * entity);
 };
 
 

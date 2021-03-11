@@ -21,3 +21,14 @@ void FishPlayer::RotateFish(float fishRotationX, float fishRotationY)
     auto rotateAction = cocos2d::RotateTo::create(1.0, CC_RADIANS_TO_DEGREES(fishTotalRotation));
     runAction(rotateAction);
 }
+
+void FishPlayer::PlayerAnimation(bool isThereABubble)
+{
+    if (isThereABubble)
+    {
+        SetTexture("fishBubble.png");
+    }
+    else {
+        SetTexture("fish.png");
+    }
+}

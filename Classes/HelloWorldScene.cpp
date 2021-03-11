@@ -10,7 +10,6 @@ Scene* HelloWorld::createScene()
     return HelloWorld::create();
 }
 
-// Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
@@ -76,16 +75,16 @@ void HelloWorld::update(float delta)
     relocateSprite(bubble);
     for (int i = 0; i<enemyNumber;i++)
     {
-        enemyKillPlayer(evilFishes[i]);
+        if (evilFishes[i]->IntersecsPlayer(fish))
+        {
+            returnToMenu();
+        }
     }
-    playerAnimation(); // Part of player
+    fish->PlayerAnimation(bubbleShot);
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-    /*playerDirectionX = touch->getLocationInView().x;
-    playerDirectionY = touch->getLocationInView().y;
-    rotateCharacter(playerDirectionX, playerDirectionY);*/ // Part of player
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
     shotBubble(touch);
     return true;
@@ -93,9 +92,6 @@ bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 
 void HelloWorld::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-    /*playerDirectionX = touch->getLocationInView().x;
-    playerDirectionY = touch->getLocationInView().y;
-    rotateCharacter(playerDirectionX, playerDirectionY);*/ // Part of player
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
     shotBubble(touch);
 }
@@ -249,27 +245,11 @@ void HelloWorld::enemyBehaviourBeginning(EvilFish * theEnemy)
     theEnemy->runAction(action);
 }
 
-void HelloWorld::enemyKillPlayer(EvilFish * theEnemy)
+void HelloWorld::returnToMenu()
 {
-    cocos2d::Rect enemyBox = theEnemy->getBoundingBox();
-    cocos2d::Rect playerBox = fish->getBoundingBox();
-    if (playerBox.intersectsRect(enemyBox))
-    {
-        auto scene = MenuScene::createScene();
-        Director::getInstance()->pushScene(scene);
-    }
+    auto scene = MenuScene::createScene();
+    Director::getInstance()->pushScene(scene);
 }
-
-void HelloWorld::playerAnimation()
-{
-    if (bubbleShot)
-    {
-        fish->SetTexture("fishBubble.png");
-    }
-    else {
-        fish->SetTexture("fish.png");
-    }
-} // Part of player
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
