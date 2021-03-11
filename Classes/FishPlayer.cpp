@@ -43,3 +43,8 @@ void FishPlayer::PlayerAnimation(bool isThereABubble)
         SetTexture("fish.png");
     }
 }
+
+float FishPlayer::GetPlayerLimitDistance()
+{
+    return playerLimitDistance;
+}

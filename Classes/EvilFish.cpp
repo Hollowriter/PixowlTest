@@ -20,6 +20,57 @@ void EvilFish::MovingTowardsPlayer(Entity *entity)
     runAction(action);
 }
 
+void EvilFish::Relocate(Entity *entity, float playerLimitDistance)
+{
+    bool randomGot = false;
+    float newPositionX = 0;
+    float newPositionY = 0;
+    do {
+        newPositionX = cocos2d::RandomHelper::random_int(1, spawningDistance);
+        newPositionY = cocos2d::RandomHelper::random_int(1, spawningDistance);
+        if (newPositionX != entity->getPosition().x || newPositionY != entity->getPosition().y)
+        {
+            if (newPositionX != entity->getPosition().x)
+            {
+                if (newPositionX - entity->getPosition().x > 0)
+                {
+                    if (newPositionX - entity->getPosition().x > playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+                if (newPositionX - entity->getPosition().x < 0)
+                {
+                    if (newPositionX - entity->getPosition().x < -playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+            }
+            if (newPositionY != entity->getPosition().y)
+            {
+                if (newPositionY - entity->getPosition().y > 0)
+                {
+                    if (newPositionY - entity->getPosition().y > playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+                if (newPositionY - entity->getPosition().y < 0)
+                {
+                    if (newPositionY - entity->getPosition().y < -playerLimitDistance)
+                    {
+                        randomGot = true;
+                    }
+                }
+            }
+        }
+    } while(!randomGot);
+    stopAllActions();
+    setPosition(newPositionX, newPositionY);
+    MovingTowardsPlayer(entity);
+}
+
 bool EvilFish::IntersectsPlayer(Entity *entity)
 {
     if (getBoundingBox().intersectsRect(entity->getBoundingBox()))
@@ -27,4 +78,9 @@ bool EvilFish::IntersectsPlayer(Entity *entity)
         return true;
     }
     return false;
+}
+
+int EvilFish::GetSpawningDistance()
+{
+    return spawningDistance;
 }

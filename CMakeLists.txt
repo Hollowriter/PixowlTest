@@ -1,4 +1,4 @@
-#/****************************************************************************
+﻿#/****************************************************************************
 # Copyright (c) 2013-2014 cocos2d-x.org
 # Copyright (c) 2015-2017 Chukong Technologies Inc.
 #
@@ -157,13 +157,13 @@ endif ()
 set(GAME_SRC
         ${PLATFORM_SPECIFIC_SRC}
         Classes/AppDelegate.cpp
-        Classes/HelloWorldScene.cpp
+        Classes/MainScene.cpp
         )
 
 set(GAME_HEADERS
         ${PLATFORM_SPECIFIC_HEADERS}
         Classes/AppDelegate.h
-        Classes/HelloWorldScene.h
+        Classes/MainScene.h
         )
 
 # add the executable

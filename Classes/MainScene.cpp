@@ -1,13 +1,13 @@
-#include "HelloWorldScene.h"
+#include "MainScene.h"
 #include "MenuScene.h"
 #include "SimpleAudioEngine.h"
 #include <string>
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* MainScene::createScene()
 {
-    return HelloWorld::create();
+    return MainScene::create();
 }
 
 static void problemLoading(const char* filename)
@@ -17,7 +17,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool MainScene::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -54,25 +54,25 @@ bool HelloWorld::init()
         evilFishes[i]->SetEntityPositionX(200);
         evilFishes[i]->SetEntityPositionY(200);
         evilFishes[i]->SetAnchor(Vec2(origin.ANCHOR_MIDDLE));
-        locateEnemy(evilFishes[i]);
+        evilFishes[i]->Relocate(fish, fish->GetPlayerLimitDistance());
     }
     listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
-    listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
-    listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchMoved, this);
-    listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+    listener->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(MainScene::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     this->scheduleUpdate();
     return true;
 }
 
-void HelloWorld::update(float delta)
+void MainScene::update(float delta)
 {
     for (int i = 0; i<enemyNumber;i++)
     {
         if (bubble->IntersectsEnemy(evilFishes[i], imageXsize * 2, imageYsize * 2))
         {
-            locateEnemy(evilFishes[i]);
+            evilFishes[i]->Relocate(fish, fish->GetPlayerLimitDistance());
         }
         if (evilFishes[i]->IntersectsPlayer(fish))
         {
@@ -82,7 +82,7 @@ void HelloWorld::update(float delta)
     fish->PlayerAnimation(bubble->GetIsTraveling());
 }
 
-bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
+bool MainScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
     for (int i = 0; i<enemyNumber;i++)
@@ -92,7 +92,7 @@ bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
     return true;
 }
 
-void HelloWorld::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
+void MainScene::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     fish->RotateFish(touch->getLocationInView().x, touch->getLocationInView().y);
     for (int i = 0; i<enemyNumber;i++)
@@ -101,69 +101,18 @@ void HelloWorld::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
     }
 }
 
-void HelloWorld::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
+void MainScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
 
 }
 
-void HelloWorld::locateEnemy(EvilFish *entity)
-{
-    bool randomGot = false;
-    float newPositionX = 0;
-    float newPositionY = 0;
-    do {
-        newPositionX = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-        newPositionY = cocos2d::RandomHelper::random_int(1, spawningEnemyDistance);
-        if (newPositionX != fish->getPosition().x || newPositionY != fish->getPosition().y)
-        {
-            if (newPositionX != fish->getPosition().x)
-            {
-                if (newPositionX - fish->getPosition().x > 0)
-                {
-                    if (newPositionX - fish->getPosition().x > playerLimitDistance)
-                    {
-                        randomGot = true;
-                    }
-                }
-                if (newPositionX - fish->getPosition().x < 0)
-                {
-                    if (newPositionX - fish->getPosition().x < -playerLimitDistance)
-                    {
-                        randomGot = true;
-                    }
-                }
-            }
-            if (newPositionY != fish->getPosition().y)
-            {
-                if (newPositionY - fish->getPosition().y > 0)
-                {
-                    if (newPositionY - fish->getPosition().y > playerLimitDistance)
-                    {
-                        randomGot = true;
-                    }
-                }
-                if (newPositionY - fish->getPosition().y < 0)
-                {
-                    if (newPositionY - fish->getPosition().y < -playerLimitDistance)
-                    {
-                        randomGot = true;
-                    }
-                }
-            }
-        }
-    } while(!randomGot);
-    entity->stopAllActions();
-    entity->setPosition(newPositionX, newPositionY);
-    entity->MovingTowardsPlayer(fish);
-}
-
-void HelloWorld::returnToMenu()
+void MainScene::returnToMenu()
 {
     auto scene = MenuScene::createScene();
     Director::getInstance()->pushScene(scene);
 }
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void MainScene::menuCloseCallback(Ref* pSender)
 {
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();

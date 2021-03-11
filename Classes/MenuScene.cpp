@@ -1,5 +1,5 @@
 #include "MenuScene.h"
-#include "HelloWorldScene.h"
+#include "MainScene.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -74,7 +74,7 @@ void MenuScene::startGame(cocos2d::Touch *touch)
     auto location = touch->getLocation();
     if (menuButton->getBoundingBox().containsPoint(location))
     {
-        auto scene = HelloWorld::createScene();
+        auto scene = MainScene::createScene();
         Director::getInstance()->pushScene(scene);
     }
 }
